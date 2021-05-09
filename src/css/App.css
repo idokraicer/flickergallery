@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+.gallery-root {
+  text-align: center;
+  display: block;
+}
+
+
+.sideBar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1001; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  color: white;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sideBar .closebtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 36px;
+
+}
+
+.sideBar> a{
+  color: white;
+  text-decoration: none;
+}
+
+.openbtn {
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  left: 0px;
+  position: fixed;
+  width: 5vw;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+.app-input {
+  line-height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 0 8px;
+  color: #666;
+  width: 400px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
