@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Image from './Image'
 
-
-export default function Gallery({tag, setTag, page, setPage, images, setImages, favImages, setFavImages, infiniteScroll, setInfiniteScroll}) {
-
+export default function Gallery({tag, setTag, page, setPage, images, setImages, favImages, setFavImages, infiniteScroll, setInfiniteScroll, loadingNext, setLoadingNext}) {
     
+    const [dragged, setdragged] = useState()
+    const [target, settarget] = useState()
 
     const getImages = (tag) => {
         
@@ -28,6 +28,15 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
             }
           });
     }
+    const insert = (arr, index, newItem) => [
+        // part of the array before the specified index
+        ...arr.slice(0, index),
+        // inserted item
+        newItem,
+        // part of the array after the specified index
+        ...arr.slice(index)
+    ]
+
     const arrayUnique = (array) => {
         let a = array.concat();
         for(let i=0; i<a.length; ++i) {
@@ -39,38 +48,73 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
     
         return a;
     }
+    const handleDragStart = (e, index) => {
+        setdragged(index)
+        e.dataTransfer.setData("text/html", index);
+        e.dataTransfer.setDragImage(e.target, 20, 20);
+        //console.log(dragged)
+    }
+
+    const handleDragOver = (index, e) => {
+        e.preventDefault()
+        settarget(index)
+        
+    }
+
+    const handleDrop = (e) => {
+        e.preventDefault()
+        if(dragged === target) {
+            return;
+        }
+        let newImagesArr = images.filter((img) => img.id !== images[dragged].id)
+        setImages(insert(newImagesArr, target, images[dragged]))
+    }
+    
     useEffect(() => {
-        getImages(tag)
-    }, [])
+        if(loadingNext){
+            console.log(`Loading page ${page}, total of ${images.length} photos.`)
+            setPage(page +1)
+            getImages(tag)
+            setLoadingNext(false)
+        }
+        
+        
+    }, [loadingNext])
 
     
 
     useEffect(() => {
-        getImages(tag)
         
-    }, [tag, page])
+            getImages(tag)
+        
+    }, [tag])
     return (
         <div >
             <input type="text" className="app-input" onChange={(e) => {
                 setTag(e.target.value)
-                setPage(0)
+                setPage(1)
                 setImages([])
-                }} value={tag}/>
-            <br></br>
-            <span>Infinite scrolling?</span>
-            <label className="switch">
-
-                <input type="checkbox" defaultChecked={infiniteScroll} onChange={() => {
-                    setInfiniteScroll(!infiniteScroll)
-                    localStorage.setItem('InfScrollToggle', JSON.stringify(infiniteScroll));
-                }} />
-                <span className="slider round"></span>
-            </label>
-            <div className="gallery-root" style={{marginTop: '15px'}}>
-            {images.map(element => {
-                return <Image image={element} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages}/>
-            })}
-            </div>
+                }}
+                value={tag}/>
+                <br></br>
+                <span>Infinite scrolling?</span>
+                
+                <label className="switch">
+                    <input type="checkbox" defaultChecked={infiniteScroll} onChange={() => {
+                        setInfiniteScroll(!infiniteScroll)
+                    }} />
+                    <span className="slider round"></span>
+                </label>
+                        
+                        <div className="gallery-root" style={{marginTop: '15px'}}>
+                        
+                            {images.map((element, index) => {
+                                return <Image index={index} key={Math.random()} image={element} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages} 
+                                handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDrop={handleDrop}/>
+                            })}
+                        </div>
+                    
+                
         </div>
         
     )

@@ -1,12 +1,20 @@
 import React, {useEffect, useState} from 'react'
 import FontAwesome from 'react-fontawesome';
 import './Image.scss';
+import Swal from 'sweetalert2'
 
 
-export default function Image({image, images, setImages, favImages, setFavImages}) {
+
+export default function Image({image, images, setImages, favImages, setFavImages, index, handleDragStart, handleDragOver, handleDrop}) {
     const [flip, setflip] = useState(false)
-    const [expand, setexpand] = useState(0)
     const [isInFavs, setIsInFavs] = useState(false)
+   
+    
+    useEffect(() => {
+        //document.addEventListener("dragend", (e) => doSomething(e))
+        /*document.addEventListener("dragStart", (e) => handleDragStart(e))
+        document.addEventListener("dragOver", (e) => handleDragOver(e))*/
+    }, [])
     useEffect(() => {
         if(favImages !== null && favImages !== undefined && favImages.indexOf(image) < 0){
             
@@ -25,26 +33,41 @@ export default function Image({image, images, setImages, favImages, setFavImages
         newItem,
         // part of the array after the specified index
         ...arr.slice(index)
-      ]
+    ]
+    const doSomething = (e) => {
+        console.log("hey")
+    }
+    
     return (
         <div
             className='image-root'
-            key={image.id.toString()} 
+            key={image.id} 
+            draggable='true' 
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={(e) => handleDragOver(index, e)}
+            onDrop={(e) => handleDrop(e)}
+            image={image}
             style={{
             backgroundImage: `url(${urlFromDto(image)})`,
-            width: (20+expand)+'vw',
-            height: (20+expand)+'vw',
-            padding: '10vw',
-            transform: flip ? '' : 'scaleX(-1)'
+            
+            width: '20vw',
+            height: '20vw',
+            padding: '10%',
+            transform: flip ? 'scaleY(-1)' : ''
             }}
         >
-            <div style={{transform: flip ? '' : 'scaleX(-1)'}}>
-                <FontAwesome className='image-icon' name="fas arrows-alt-h" title="flip" onClick={() => setflip(!flip)}/>
-                <FontAwesome className='image-icon' name="fa fa-clone" title="clone" onClick={() => setImages(insert(images,images.indexOf(image),image))}/>
-                <FontAwesome className='image-icon' name="expand" title="expand" onClick={() => setexpand(expand+2)}/>
-                <FontAwesome className='image-icon' name='fas fa-check'  title='favorite' onClick={() => {
-                    console.log(favImages.indexOf(image))
-                    if(!isInFavs) setFavImages(insert(favImages, 0, image)) 
+            <div style={{transform: flip ? 'scaleY(-1)' : ''}}>
+                <FontAwesome className='image-icon' name="fas fa-snowboarding fa-rotate-180" title="Flip image" onClick={() => setflip(!flip)}/>
+                <FontAwesome className='image-icon' name="far fa-clone" title="Clone" onClick={() => setImages(insert(images,images.indexOf(image),image))}/>
+                <FontAwesome className='image-icon' name="expand" title="Expand" onClick={() => Swal.fire({
+                    imageUrl: `${urlFromDto(image)}`,
+                    imageHeight: '80vh',
+                    width: 'auto',
+                    imageAlt: 'A tall image',
+                    text: image.title
+                })}/>
+                <FontAwesome className='image-icon' name={ !isInFavs ? 'far fa-thumbs-up' : 'fas fa-check' }  title={!isInFavs ? 'Add to favorites': 'Remove from favorites'} onClick={() => {
+                    !isInFavs ? setFavImages(insert(favImages, 0, image)) : setFavImages(favImages.filter(img => img.id !== image.id))
                     }} />
             </div> 
         </div>
