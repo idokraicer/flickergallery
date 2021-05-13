@@ -44,6 +44,7 @@
   left: 0px;
   position: fixed;
   width: 5vw;
+  z-index: 100;
 }
 
 .openbtn:hover {
@@ -60,4 +61,21 @@
   width: 400px;
   margin-bottom: 10px;
   margin-top: 15px;
+}
+
+
+div.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: fixed;
+  top: 0;
+  align-content: center;
+  width: 100%;
+  z-index: 99;
+  background-color: #fff;
+  opacity: 60%;
+  padding-bottom: 30px;
+}
+
+div.sticky:hover {
+  opacity: 100%;
 }

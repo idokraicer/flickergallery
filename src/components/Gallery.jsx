@@ -6,6 +6,7 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
     
     const [dragged, setdragged] = useState()
     const [target, settarget] = useState()
+    const [scrolling, setscrolling] = useState(false)
 
     const getImages = (tag) => {
         
@@ -52,7 +53,6 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
         setdragged(index)
         e.dataTransfer.setData("text/html", index);
         e.dataTransfer.setDragImage(e.target, 20, 20);
-        //console.log(dragged)
     }
 
     const handleDragOver = (index, e) => {
@@ -88,33 +88,41 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
             getImages(tag)
         
     }, [tag])
+
+    useEffect(() => {
+        
+        document.addEventListener('scroll' , () => {document.documentElement.scrollHeight > 400 ? setscrolling(true) : setscrolling(false)} )
+    
+    }, [])
+
+
     return (
-        <div >
-            <input type="text" className="app-input" onChange={(e) => {
-                setTag(e.target.value)
-                setPage(1)
-                setImages([])
-                }}
-                value={tag}/>
+        <div className='galleryContainer'>
+            <div className={scrolling ? 'sticky' : ''}>
+                <h1>Ido's Flicker Gallery</h1>
+                <input type="text" className="app-input" onChange={(e) => {
+                    setTag(e.target.value)
+                    setPage(1)
+                    setImages([])
+                    }}
+                    value={tag}/>
                 <br></br>
                 <span>Infinite scrolling?</span>
-                
+                    
                 <label className="switch">
                     <input type="checkbox" defaultChecked={infiniteScroll} onChange={() => {
                         setInfiniteScroll(!infiniteScroll)
                     }} />
                     <span className="slider round"></span>
                 </label>
+            </div>        
+            <div className="gallery-root">
                         
-                        <div className="gallery-root" style={{marginTop: '15px'}}>
-                        
-                            {images.map((element, index) => {
-                                return <Image index={index} key={Math.random()} image={element} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages} 
-                                handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDrop={handleDrop}/>
-                            })}
-                        </div>
-                    
-                
+                {images.map((element, index) => {
+                    return <Image index={index} key={index} image={element} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages} 
+                    handleDragStart={handleDragStart} handleDragOver={handleDragOver} handleDrop={handleDrop}/>
+                })}
+            </div>  
         </div>
         
     )
