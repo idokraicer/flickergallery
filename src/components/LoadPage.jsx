@@ -1,11 +1,11 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome';
 
-export default function LoadPage({images, setImages, page, setPage}) {
+export default function LoadPage({setLoadingNext}) {
     
     return (
         <div>
-            <a onClick={(e) => setPage(page +1)}>
+            <a onClick={(e) => {setLoadingNext(true)}}>
                 <FontAwesome name="fas fa-arrow-circle-right"/>
             </a>
         </div>

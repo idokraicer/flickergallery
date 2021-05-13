@@ -14,18 +14,18 @@ function App() {
   const [images, setImages] = useState([])
   const [sidebar, setSidebar] = useState(false)
   const [favImages, setFavImages] = useState([])
-  const [infiniteScroll, setInfiniteScroll] = useState(localStorage.getItem('InfScrollToggle') === 'true')
+  const [infiniteScroll, setInfiniteScroll] = useState(localStorage.getItem('InfScrollToggle')?.includes('true'))
 
   const [loadingNext, setLoadingNext] = useState(false)
 
-  const handleScroll = async () => {
-    if(infiniteScroll === true && !loadingNext) {
-        if((document.documentElement.scrollTop + window.innerHeight) === document.documentElement.scrollHeight ){
+  const handleScroll = () => {
+    if(infiniteScroll && !loadingNext) {
+        if(document.documentElement.scrollTop + window.innerHeight === document.documentElement.scrollHeight ){
           setLoadingNext(true)
         } 
         
       }
-      
+      console.log(typeof infiniteScroll, infiniteScroll, 'handleScroll End')
     }
     
   
@@ -53,27 +53,26 @@ function App() {
 }
 
   useEffect(() => {
-    
+    if(localStorage.getItem('favImages') !== null) setFavImages(JSON.parse(localStorage.getItem('favImages')))
+    window.addEventListener('scroll', handleScroll);
   }, [])
 
   useEffect(() => {
   }, [page])
 
   useEffect(() => {
-    infiniteScroll ?  document.addEventListener('scroll', handleScroll, {passive: true}) :
-    document.removeEventListener('scroll', handleScroll)
-    localStorage.setItem('InfScrollToggle', infiniteScroll === true)
+    localStorage.setItem('InfScrollToggle', infiniteScroll)
 
 }, [infiniteScroll])
 
   return (
     
-    <div className="App" >
+    <div className="App" onScroll={handleScroll} >
       <a className="openbtn" onClick={() => setSidebar(!sidebar)}>Open Favorite Images</a>
 
       <SideBar key={'sidebar'} sidebar={sidebar} setSidebar={setSidebar} favImages={favImages} setFavImages={setFavImages}/>
       <Gallery key={'gallery'} loadingNext={loadingNext} setLoadingNext={setLoadingNext} tag={tag} setTag={setTag} page={page} setPage={setPage} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages} infiniteScroll={infiniteScroll} setInfiniteScroll={setInfiniteScroll}/>
-      <LoadPage key={'loadmore'} page={page} setPage={setPage}/>
+      <LoadPage key={'loadmore'} setLoadingNext={setLoadingNext}/>
     </div>
   );
 
