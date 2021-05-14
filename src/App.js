@@ -71,7 +71,7 @@ function App() {
   return (
     
     <div className="App" onScroll={handleScroll} >
-      <a className="openbtn" onClick={() => setSidebar(!sidebar)}>Open Favorite Images</a>
+      <a className={sidebar ? 'openbtn open' : "openbtn"} onClick={() => setSidebar(!sidebar)}>{!sidebar ? 'Open' : "Close"} Favorite Images</a>
 
       <SideBar key={'sidebar'} sidebar={sidebar} setSidebar={setSidebar} favImages={favImages} setFavImages={setFavImages}/>
       <InfiniteScroll

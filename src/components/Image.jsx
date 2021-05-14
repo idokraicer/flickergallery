@@ -58,7 +58,7 @@ export default function Image({image, images, setImages, favImages, setFavImages
             transform: flip ? 'scaleY(-1)' : ''
             }}
         >
-            <div style={{transform: flip ? 'scaleY(-1)' : ''}}>
+            <div className={'image-options'} style={{transform: flip ? 'scaleY(-1)' : ''}}>
                 <FontAwesome className='image-icon' name="fas fa-snowboarding fa-rotate-180" title="Flip image" onClick={() => setflip(!flip)}/>
                 <FontAwesome className='image-icon' name="far fa-clone" title="Clone" onClick={() => {
                     setImages(insert(images,images.indexOf(image),image))}}/>

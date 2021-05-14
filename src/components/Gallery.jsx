@@ -16,7 +16,7 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
           url: getImagesUrl,
           baseURL: baseUrl,
           method: 'GET'
-        })
+        }) 
           .then(res => res.data)
           .then(res => {
             if (
@@ -91,14 +91,14 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
 
     useEffect(() => {
         
-        document.addEventListener('scroll' , () => {document.documentElement.scrollHeight > 400 ? setscrolling(true) : setscrolling(false)} )
+        document.addEventListener('scroll' , () => {window.pageYOffset > 0 ? setscrolling(true) : setscrolling(false)} )
     
     }, [])
 
 
     return (
         <div className='galleryContainer'>
-            <div className={scrolling ? 'sticky' : ''}>
+            <div className={ scrolling ? 'sticky' : 'inputContainer'}>
                 <h1>Ido's Flicker Gallery</h1>
                 <input type="text" className="app-input" onChange={(e) => {
                     setTag(e.target.value)
@@ -116,7 +116,7 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
                     <span className="slider round"></span>
                 </label>
             </div>        
-            <div className="gallery-root">
+            <div className={"gallery-root", scrolling ? 'paddingtop' : ''} >
                         
                 {images.map((element, index) => {
                     return <Image index={index} key={index} image={element} images={images} setImages={setImages} favImages={favImages} setFavImages={setFavImages} 
