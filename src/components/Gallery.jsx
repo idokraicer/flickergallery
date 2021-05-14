@@ -97,6 +97,7 @@ export default function Gallery({tag, setTag, page, setPage, images, setImages, 
 
 
     return (
+        
         <div className='galleryContainer'>
             <div className={ scrolling ? 'sticky' : 'inputContainer'}>
                 <h1>Ido's Flicker Gallery</h1>

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #999;
 }
 .gallery-root {
   text-align: center;
@@ -15,7 +16,7 @@
   z-index: 1001; /* Stay on top */
   top: 0;
   left: 0;
-  background-color: #111; /* Black*/
+  background-color: #333; /* Black*/
   color: white;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
@@ -40,7 +41,7 @@
 .openbtn {
   font-size: 16px;
   cursor: pointer;
-  background-color: #111;
+  background-color: #333;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -52,13 +53,13 @@
 }
 
 .openbtn:hover {
-  background-color: #444;
+  background-color: #111;
 }
 
 .openbtn.open {
   font-size: 16px;
   cursor: pointer;
-  background-color: #111;
+  background-color: #333;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -88,9 +89,9 @@ div.sticky {
   position: fixed;
   top: 0;
   align-content: center;
+  background-color: #999;
   width: 100%;
   z-index: 99;
-  background-color: #fff;
   opacity: 60%;
   padding-bottom: 20px;
   transition: all 0.6s;
@@ -100,16 +101,16 @@ div.inputContainer {
   position: relative;
   top: 0;
   align-content: center;
+  background-color: #999;
   width: 100%;
   z-index: 99;
-  background-color: #fff;
-  opacity: 100%;
+  opacity: 90%;
   padding-bottom: 20px;
   transition: all 0.3s;
 }
 
 div.sticky:hover {
-  opacity: 100%;
+  opacity: 90%;
   transition: 0.5;
 }
 
