@@ -1,119 +1,115 @@
 .App {
-  text-align: center;
-  background: #999;
+	text-align: center;
+	background: #999;
 }
 .gallery-root {
-  text-align: center;
-  display: block;
-  padding-top: 20px;
+	text-align: center;
+	display: block;
+	padding-top: 20px;
 }
 
-
 .sideBar {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1001; /* Stay on top */
-  top: 0;
-  left: 0;
-  background-color: #333; /* Black*/
-  color: white;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
-  direction: rtl;
+	height: 100%; /* 100% Full-height */
+	width: 0; /* 0 width - change this with JavaScript */
+	position: fixed; /* Stay in place */
+	z-index: 1001; /* Stay on top */
+	top: 0;
+	left: 0;
+	background-color: #333; /* Black*/
+	color: white;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 60px; /* Place content 60px from the top */
+	transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+	direction: rtl;
 }
 
 .sideBar.image-root {
-  direction: ltr;
+	direction: ltr;
 }
 
 .sideBar .image-options {
-  direction: ltr;
+	direction: ltr;
 }
 
-
-.sideBar> a{
-  color: white;
-  text-decoration: none;
+.sideBar > a {
+	color: white;
+	text-decoration: none;
 }
 
 .openbtn {
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #333;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  position: fixed;
-  width: 5vw;
-  z-index: 1001;
-  left: 0px;
-  transition: 0.5s;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: #333;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	position: fixed;
+	width: 5vw;
+	z-index: 1001;
+	left: 0px;
+	transition: 0.5s;
 }
 
 .openbtn:hover {
-  background-color: #111;
+	background-color: #111;
 }
 
 .openbtn.open {
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #333;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  position: fixed;
-  left: 24vw;
-  width: 5vw;
-  z-index: 1001;
-  transition: all 0.5s;
+	font-size: 16px;
+	cursor: pointer;
+	background-color: #333;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	position: fixed;
+	left: 24vw;
+	width: 5vw;
+	z-index: 1001;
+	transition: all 0.5s;
 }
 
 .app-input {
-  line-height: 30px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 0 8px;
-  color: #666;
-  width: 400px;
-  margin-bottom: 10px;
-  margin-top: 15px;
+	line-height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	padding: 0 8px;
+	color: #666;
+	width: 400px;
+	margin-bottom: 10px;
+	margin-top: 15px;
 }
 
-
-
 div.sticky {
-  position: -webkit-sticky; /* Safari */
-  position: fixed;
-  top: 0;
-  align-content: center;
-  background-color: #999;
-  width: 100%;
-  z-index: 99;
-  opacity: 60%;
-  padding-bottom: 20px;
-  transition: all 0.6s;
+	position: -webkit-sticky; /* Safari */
+	position: fixed;
+	top: 0;
+	align-content: center;
+	background-color: #999;
+	width: 100%;
+	z-index: 99;
+	opacity: 60%;
+	padding-bottom: 20px;
+	transition: all 0.6s;
 }
 
 div.inputContainer {
-  position: relative;
-  top: 0;
-  align-content: center;
-  background-color: #999;
-  width: 100%;
-  z-index: 99;
-  opacity: 90%;
-  padding-bottom: 20px;
-  transition: all 0.3s;
+	position: relative;
+	top: 0;
+	align-content: center;
+	background-color: #999;
+	width: 100%;
+	z-index: 99;
+	opacity: 95%;
+	padding-bottom: 20px;
+	transition: all 0.3s;
 }
 
 div.sticky:hover {
-  opacity: 90%;
-  transition: 0.5;
+	opacity: 90%;
+	transition: 0.5;
 }
 
 .paddingtop {
-  padding-top: 188px;
+	padding-top: 188px;
 }
